@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Otto & Partner Strategieberatung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 
+         * DESIGN SYSTEM & VARIABLES 
+         * Theme: "Executive Marble" - Seriosität trifft auf Avantgarde
+         */
+        :root {
+            --bg-color: #F7F6F2; /* Warmes Off-White */
+            --text-main: #1A1A1A; /* Fast Schwarz */
+            --accent-primary: #2C3E50; /* Dunkles Schieferblau - Klassisch */
+            --accent-highlight: #C8A165; /* Gedämpftes Gold - Premium */
+            --grid-line: rgba(26, 26, 26, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Manrope', sans-serif;
+            
+            --spacing-xs: 1rem;
+            --spacing-sm: 2rem;
+            --spacing-md: 4rem;
+            --spacing-lg: 8rem;
+            --spacing-xl: 12rem;
+        }
+
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            font-size: clamp(1rem, 1.2vw, 1.25rem);
+            color: #4a4a4a;
+            max-width: 65ch;
+        }
+
+        /* LAYOUT UTILITIES */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xs);
+        }
+
+        .section-padding {
+            padding: var(--spacing-lg) 0;
+        }
+
+        /* BORDER LINES */
+        .border-bottom {
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .border-top {
+            border-top: 1px solid var(--grid-line);
+        }
+
+        /* NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(247, 246, 242, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--grid-line);
+            padding: 1.5rem 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-primary);
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        .nav-links a {
+            margin-left: 2.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-highlight);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-highlight);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Active State for Contact Page */
+        .nav-links a.active {
+            color: var(--accent-highlight);
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Icon */
+        .menu-toggle {
+            display: block;
+            font-family: var(--font-display);
+            cursor: pointer;
+        }
+
+        @media(min-width: 768px) {
+            .nav-links { display: flex; }
+            .menu-toggle { display: none; }
+        }
+
+        /* HERO SECTION - ASYMMETRIC SPLIT */
+        .hero {
+            min-height: 80vh; /* Slightly shorter for contact page */
+            display: flex;
+            align-items: center;
+            padding-top: 80px; /* Header height */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            width: 100%;
+        }
+
+        @media(min-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+                align-items: end;
+            }
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            display: block;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: var(--spacing-xs);
+            color: var(--accent-highlight);
+            font-weight: 600;
+        }
+
+        .hero h1 span {
+            display: block;
+            line-height: 0.9;
+        }
+
+        .hero h1 .indent {
+            margin-left: 1.5em;
+            color: var(--accent-primary);
+        }
+
+        .hero-desc {
+            margin-top: var(--spacing-sm);
+            font-size: 1.2rem;
+            padding-left: 2rem;
+            border-left: 2px solid var(--accent-highlight);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+            background: var(--accent-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Abstract Art CSS only */
+        .abstract-circle {
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            position: absolute;
+            animation: rotate 20s linear infinite;
+        }
+        .c1 { width: 80%; height: 80%; border-color: var(--accent-highlight); }
+        .c2 { width: 60%; height: 60%; border-style: dashed; animation-direction: reverse; }
+        .c3 { width: 40%; height: 40%; background: rgba(200, 161, 101, 0.1); }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* CONTACT SPECIFIC STYLES */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        @media(min-width: 992px) {
+            .contact-layout {
+                grid-template-columns: 1fr 1.5fr;
+            }
+        }
+
+        .contact-info-block {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .contact-label {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .contact-value {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            font-weight: 300;
+        }
+
+        /* FORM STYLES - CLEAN & EXECUTIVE */
+        .form-group {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 1rem 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            color: var(--text-main);
+            transition: var(--transition);
+            border-radius: 0;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .form-label-float {
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            font-size: 1rem;
+            color: #666;
+            pointer-events: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input:focus ~ .form-label-float,
+        .form-input:valid ~ .form-label-float,
+        .form-textarea:focus ~ .form-label-float,
+        .form-textarea:valid ~ .form-label-float {
+            top: -1.2rem;
+            font-size: 0.75rem;
+            color: var(--accent-highlight);
+        }
+
+        /* BTN STYLE REUSE */
+        .btn-primary {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s;
+            margin-top: var(--spacing-sm);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--accent-primary);
+            z-index: -1;
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary:hover::before {
+            width: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--text-main);
+            color: #F7F6F2;
+            padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        @media(min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-display);
+            margin-bottom: 1.5rem;
+            color: var(--accent-highlight);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+        }
+
+        .address-box p {
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* UTILITIES */
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">OTTO & PARTNER</a>
+            <div class="menu-toggle">MENU</div>
+            <nav class="nav-links">
+                <a href="index.html">Startseite</a>
+                <a href="ueber-uns.html">Über uns</a>
+                <a href="leistungen.html">Leistungen</a>
+                <a href="kontakt.html" class="active">Kontakt</a>
+                <a href="impressum.html">Impressum</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <span class="hero-subtitle reveal-text">Dialog Aufnehmen</span>
+                    <h1 class="reveal-text delay-1">
+                        <span>Ihre Vision.</span>
+                        <span class="indent">Unser Weg.</span>
+                    </h1>
+                    <p class="hero-desc reveal-text delay-2">
+                        Strategische Transformation beginnt mit dem ersten Gespräch. Lassen Sie uns gemeinsam erörtern, wie wir Ihr Unternehmen zukunftssicher aufstellen.
+                    </p>
+                </div>
+                <div class="hero-visual reveal-text delay-3">
+                    <div class="abstract-circle c1"></div>
+                    <div class="abstract-circle c2"></div>
+                    <div class="abstract-circle c3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT CONTENT -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="contact-layout">
+                
+                <!-- Left Column: Info -->
+                <div class="contact-details">
+                    <h2 class="reveal-text">Standort &<br>Verbindung</h2>
+                    
+                    <div class="contact-info-block reveal-text delay-1">
+                        <span class="contact-label">Hauptsitz</span>
+                        <div class="contact-value">
+                            Otto & Partner<br>
+                            Leopoldstraße 77<br>
+                            80802 München<br>
+                            Deutschland
+                        </div>
+                    </div>
+
+                    <div class="contact-info-block reveal-text delay-2">
+                        <span class="contact-label">Direkter Draht</span>
+                        <div class="contact-value">
+                            <a href="mailto:info@otto-partner.de">info@otto-partner.de</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-block reveal-text delay-3">
+                        <span class="contact-label">Bürozeiten</span>
+                        <div class="contact-value">
+                            Mo - Fr: 09:00 - 18:00 Uhr<br>
+                            Termine nach Vereinbarung
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Form -->
+                <div class="contact-form-wrapper reveal-text delay-2">
+                    <p style="margin-bottom: 3rem;">
+                        Bitte nutzen Sie das folgende Formular für Ihre Anfrage. Ein Senior Partner wird sich innerhalb von 24 Stunden persönlich bei Ihnen melden.
+                    </p>
+                    
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" class="form-input" required>
+                            <label for="name" class="form-label-float">Ihr Name</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <label for="email" class="form-label-float">E-Mail Adresse</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                            <label for="subject" class="form-label-float">Betreff</label>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="message" name="message" class="form-textarea" required></textarea>
+                            <label for="message" class="form-label-float">Ihre Nachricht</label>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Anfrage Senden</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Otto & Partner</h4>
+                    <div class="address-box">
+                        <p>Leopoldstraße 77</p>
+                        <p>80802 München</p>
+                        <p>Deutschland</p>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="leistungen.html">Leistungen</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Otto & Partner Strategieberatung. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

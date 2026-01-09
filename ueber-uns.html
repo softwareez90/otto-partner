@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns | Otto & Partner Strategieberatung</title>
+    
+    <!-- Google Fonts importieren (basierend auf CSS Variablen) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* 
+         * DESIGN SYSTEM & VARIABLES 
+         * Theme: "Executive Marble" - Seriosität trifft auf Avantgarde
+         */
+        :root {
+            --bg-color: #F7F6F2; /* Warmes Off-White */
+            --text-main: #1A1A1A; /* Fast Schwarz */
+            --accent-primary: #2C3E50; /* Dunkles Schieferblau - Klassisch */
+            --accent-highlight: #C8A165; /* Gedämpftes Gold - Premium */
+            --grid-line: rgba(26, 26, 26, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Manrope', sans-serif;
+            
+            --spacing-xs: 1rem;
+            --spacing-sm: 2rem;
+            --spacing-md: 4rem;
+            --spacing-lg: 8rem;
+            --spacing-xl: 12rem;
+        }
+
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            font-size: clamp(1rem, 1.2vw, 1.25rem);
+            color: #4a4a4a;
+            max-width: 65ch;
+        }
+
+        /* LAYOUT UTILITIES */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xs);
+        }
+
+        .section-padding {
+            padding: var(--spacing-lg) 0;
+        }
+
+        /* BORDER LINES */
+        .border-bottom {
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .border-top {
+            border-top: 1px solid var(--grid-line);
+        }
+
+        /* NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(247, 246, 242, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--grid-line);
+            padding: 1.5rem 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-primary);
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        .nav-links a {
+            margin-left: 2.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-highlight);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-highlight);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Active State Helper */
+        .nav-links a.active {
+            color: var(--accent-highlight);
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Icon */
+        .menu-toggle {
+            display: block;
+            font-family: var(--font-display);
+            cursor: pointer;
+        }
+
+        @media(min-width: 768px) {
+            .nav-links { display: flex; }
+            .menu-toggle { display: none; }
+        }
+
+        /* HERO SECTION - ASYMMETRIC SPLIT */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px; /* Header height */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            width: 100%;
+        }
+
+        @media(min-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+                align-items: end;
+            }
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            display: block;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: var(--spacing-xs);
+            color: var(--accent-highlight);
+            font-weight: 600;
+        }
+
+        .hero h1 span {
+            display: block;
+            line-height: 0.9;
+        }
+
+        .hero h1 .indent {
+            margin-left: 1.5em;
+            color: var(--accent-primary);
+        }
+
+        .hero-desc {
+            margin-top: var(--spacing-sm);
+            font-size: 1.2rem;
+            padding-left: 2rem;
+            border-left: 2px solid var(--accent-highlight);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+            background: var(--accent-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Abstract Art CSS only */
+        .abstract-circle {
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            position: absolute;
+            animation: rotate 20s linear infinite;
+        }
+        .c1 { width: 80%; height: 80%; border-color: var(--accent-highlight); }
+        .c2 { width: 60%; height: 60%; border-style: dashed; animation-direction: reverse; }
+        .c3 { width: 40%; height: 40%; background: rgba(200, 161, 101, 0.1); }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ABOUT SECTION - EDITORIAL LAYOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        @media(min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-primary);
+            position: sticky;
+            top: 100px;
+        }
+
+        .editorial-text p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-main);
+        }
+
+        .editorial-text strong {
+            color: var(--accent-primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-highlight);
+        }
+
+        /* SERVICES - BENTO GRID */
+        .services-wrapper {
+            background-color: #1a1a1a; /* Dark Section */
+            color: #fff;
+            padding: var(--spacing-lg) 0;
+        }
+
+        .services-wrapper h2 {
+            color: #fff;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            background-color: rgba(255,255,255,0.1); /* Lines via gap */
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media(min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, minmax(250px, auto));
+            }
+            .bento-item:nth-child(1) { grid-column: 1 / 3; }
+            .bento-item:nth-child(4) { grid-column: 2 / 4; }
+        }
+
+        .bento-item {
+            background-color: #1a1a1a;
+            padding: 3rem;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-item:hover {
+            background-color: #222;
+        }
+
+        .bento-num {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .bento-item:hover .bento-num {
+            color: var(--accent-highlight);
+            transform: translateY(-10px);
+        }
+
+        .bento-item h3 {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .bento-item p {
+            color: #999;
+            font-size: 0.95rem;
+        }
+
+        /* CONTACT / CTA */
+        .cta-section {
+            text-align: center;
+            background-color: var(--bg-color);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s;
+            margin-top: var(--spacing-sm);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--accent-primary);
+            z-index: -1;
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary:hover::before {
+            width: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--text-main);
+            color: #F7F6F2;
+            padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        @media(min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-display);
+            margin-bottom: 1.5rem;
+            color: var(--accent-highlight);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+        }
+
+        .address-box p {
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* UTILITIES */
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="nav-inner">
+                <div class="logo">OTTO & PARTNER</div>
+                <div class="menu-toggle">MENU</div>
+                <nav class="nav-links">
+                    <a href="index.html">Startseite</a>
+                    <a href="ueber-uns.html" class="active">Über uns</a>
+                    <a href="leistungen.html">Leistungen</a>
+                    <a href="kontakt.html">Kontakt</a>
+                    <a href="impressum.html">Impressum</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <span class="hero-subtitle reveal-text">Wer wir sind</span>
+                        <h1 class="reveal-text delay-1">
+                            Tradition<br>
+                            <span class="indent">Trifft Zukunft.</span>
+                        </h1>
+                        <div class="hero-desc reveal-text delay-2">
+                            <p>Otto & Partner ist mehr als eine Beratung. Wir sind Architekten nachhaltigen Erfolgs für den deutschen Mittelstand und internationale Konzerne.</p>
+                        </div>
+                    </div>
+                    <div class="hero-visual reveal-text delay-3">
+                        <div class="abstract-circle c1"></div>
+                        <div class="abstract-circle c2"></div>
+                        <div class="abstract-circle c3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDITORIAL / DNA SECTION -->
+        <section class="section-padding border-bottom">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="section-label">Unsere DNA</div>
+                    <div class="editorial-text">
+                        <p>
+                            Gegründet im Herzen von München, verstehen wir uns als Brückenbauer zwischen klassischer Unternehmensführung und disruptiver Innovation. In einer Welt, die von Volatilität geprägt ist, bieten wir das Fundament für <strong>mutige Entscheidungen</strong>.
+                        </p>
+                        <p>
+                            Wir glauben nicht an Standardlösungen. Jedes Mandat beginnt mit einem weißen Blatt Papier und dem Anspruch, die verborgenen Potenziale Ihres Unternehmens freizulegen. Unsere Berater vereinen analytische Schärfe mit kreativer Intelligenz.
+                        </p>
+                        <p>
+                            Bei Otto & Partner messen wir Erfolg nicht in PowerPoint-Folien, sondern in realer Wertschöpfung. Wir begleiten Sie von der ersten strategischen Skizze bis zur finalen Implementierung – kompromisslos in der Qualität, partnerschaftlich im Umgang.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALUES / BENTO GRID -->
+        <section class="services-wrapper">
+            <div class="container">
+                <h2>Unsere Prinzipien</h2>
+                <div class="bento-grid">
+                    <!-- Item 1 (Wide) -->
+                    <div class="bento-item">
+                        <div class="bento-num">01</div>
+                        <h3>Exzellenz als Standard</h3>
+                        <p>Wir geben uns nicht mit dem Durchschnitt zufrieden. Unsere Arbeit zeichnet sich durch tiefe Branchenkenntnis und methodische Präzision aus, die den Marktstandard neu definiert.</p>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bento-item">
+                        <div class="bento-num">02</div>
+                        <h3>Integrität</h3>
+                        <p>Vertrauen ist unsere Währung. Wir beraten unabhängig, objektiv und stets im besten Interesse unserer Klienten – auch wenn die Wahrheit unbequem ist.</p>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bento-item">
+                        <div class="bento-num">03</div>
+                        <h3>Weitsicht</h3>
+                        <p>Strategie bedeutet, heute die Antworten auf die Fragen von morgen zu finden. Wir antizipieren Marktentwicklungen, bevor sie zum Mainstream werden.</p>
+                    </div>
+
+                    <!-- Item 4 (Wide) -->
+                    <div class="bento-item">
+                        <div class="bento-num">04</div>
+                        <h3>Resultate</h3>
+                        <p>Theorie ist geduldig, der Markt ist es nicht. Unser Fokus liegt auf messbaren Ergebnissen, die Ihr Unternehmen nachhaltig stärken und Wettbewerbsvorteile sichern.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEAM LEADERSHIP / TEXT ONLY (Minimalist) -->
+        <section class="section-padding border-bottom">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="section-label">Führung</div>
+                    <div class="editorial-text">
+                        <p>
+                            Geleitet von Dr. Thomas Otto und Sarah Behrens, vereint unser Führungsteam jahrzehntelange Erfahrung aus Top-Tier-Strategieberatungen und operativer C-Level-Verantwortung. 
+                        </p>
+                        <p>
+                            Wir rekrutieren ausschließlich Persönlichkeiten, die nicht nur fachlich brillieren, sondern auch den Charakter besitzen, Verantwortung zu übernehmen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="section-padding cta-section">
+            <div class="container">
+                <h2>Gemeinsam Zukunft gestalten</h2>
+                <p style="margin: 0 auto; margin-top: 1rem;">Lernen Sie das Team hinter den Strategien kennen.</p>
+                <a href="kontakt.html" class="btn-primary">Gespräch vereinbaren</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Otto & Partner</h4>
+                    <div class="address-box">
+                        <p>Leopoldstraße 77</p>
+                        <p>80802 München</p>
+                        <p>Deutschland</p>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="leistungen.html">Leistungen</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Otto & Partner Strategieberatung. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

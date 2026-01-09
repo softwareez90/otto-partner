@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | Otto & Partner</title>
+    
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* 
+         * DESIGN SYSTEM & VARIABLES 
+         * Theme: "Executive Marble" - Seriosität trifft auf Avantgarde
+         */
+        :root {
+            --bg-color: #F7F6F2; /* Warmes Off-White */
+            --text-main: #1A1A1A; /* Fast Schwarz */
+            --accent-primary: #2C3E50; /* Dunkles Schieferblau - Klassisch */
+            --accent-highlight: #C8A165; /* Gedämpftes Gold - Premium */
+            --grid-line: rgba(26, 26, 26, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Manrope', sans-serif;
+            
+            --spacing-xs: 1rem;
+            --spacing-sm: 2rem;
+            --spacing-md: 4rem;
+            --spacing-lg: 8rem;
+            --spacing-xl: 12rem;
+        }
+
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            font-size: clamp(1rem, 1.2vw, 1.25rem);
+            color: #4a4a4a;
+            max-width: 65ch;
+        }
+
+        /* LAYOUT UTILITIES */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xs);
+        }
+
+        .section-padding {
+            padding: var(--spacing-lg) 0;
+        }
+
+        /* BORDER LINES */
+        .border-bottom {
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .border-top {
+            border-top: 1px solid var(--grid-line);
+        }
+
+        /* NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(247, 246, 242, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--grid-line);
+            padding: 1.5rem 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-primary);
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        .nav-links a {
+            margin-left: 2.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-highlight);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-highlight);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Active State for Impressum */
+        .nav-links a.active {
+            color: var(--accent-highlight);
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Icon */
+        .menu-toggle {
+            display: block;
+            font-family: var(--font-display);
+            cursor: pointer;
+        }
+
+        @media(min-width: 768px) {
+            .nav-links { display: flex; }
+            .menu-toggle { display: none; }
+        }
+
+        /* HERO SECTION - ASYMMETRIC SPLIT */
+        .hero {
+            min-height: 60vh; /* Reduced height for Impressum */
+            display: flex;
+            align-items: center;
+            padding-top: 120px; /* Header height + spacing */
+            padding-bottom: var(--spacing-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            width: 100%;
+        }
+
+        @media(min-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+                align-items: center;
+            }
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            display: block;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: var(--spacing-xs);
+            color: var(--accent-highlight);
+            font-weight: 600;
+        }
+
+        .hero h1 span {
+            display: block;
+            line-height: 0.9;
+        }
+
+        .hero h1 .indent {
+            margin-left: 1.5em;
+            color: var(--accent-primary);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 400px;
+            background: var(--accent-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Abstract Art CSS only */
+        .abstract-circle {
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            position: absolute;
+            animation: rotate 20s linear infinite;
+        }
+        .c1 { width: 80%; height: 80%; border-color: var(--accent-highlight); }
+        .c2 { width: 60%; height: 60%; border-style: dashed; animation-direction: reverse; }
+        .c3 { width: 40%; height: 40%; background: rgba(200, 161, 101, 0.1); }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ABOUT SECTION - REUSED FOR IMPRESSUM CONTENT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        @media(min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-primary);
+            position: sticky;
+            top: 120px;
+        }
+
+        .editorial-text p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-main);
+        }
+
+        .editorial-text h3 {
+            color: var(--accent-primary);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .editorial-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .legal-block {
+            border-left: 2px solid var(--accent-highlight);
+            padding-left: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--text-main);
+            color: #F7F6F2;
+            padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        @media(min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-display);
+            margin-bottom: 1.5rem;
+            color: var(--accent-highlight);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+        }
+
+        .address-box p {
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* UTILITIES */
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">OTTO & PARTNER</a>
+            
+            <nav class="nav-links">
+                <a href="index.html">Startseite</a>
+                <a href="ueber-uns.html">Über uns</a>
+                <a href="leistungen.html">Leistungen</a>
+                <a href="kontakt.html">Kontakt</a>
+                <a href="impressum.html" class="active">Impressum</a>
+            </nav>
+
+            <div class="menu-toggle">MENU</div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (Compact Version) -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text reveal-text">
+                    <span class="hero-subtitle">Rechtliches</span>
+                    <h1>Impressum <span class="indent">& Angaben</span></h1>
+                </div>
+                
+                <div class="hero-visual reveal-text delay-2">
+                    <div class="abstract-circle c1"></div>
+                    <div class="abstract-circle c2"></div>
+                    <div class="abstract-circle c3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <section class="section-padding border-top">
+        <div class="container">
+            
+            <!-- Block 1: Angaben -->
+            <div class="about-grid reveal-text delay-1">
+                <div class="section-label">Angaben gemäß § 5 TMG</div>
+                <div class="editorial-text">
+                    <div class="legal-block">
+                        <h3>Betreiber der Website</h3>
+                        <p>
+                            <strong>Otto & Partner</strong><br>
+                            Leopoldstraße 77<br>
+                            80802 München<br>
+                            Deutschland
+                        </p>
+                    </div>
+
+                    <div class="legal-block">
+                        <h3>Vertretungsberechtigt</h3>
+                        <p>
+                            Inhaber: Filippo Otto
+                        </p>
+                    </div>
+
+                    <div class="legal-block">
+                        <h3>Kontakt</h3>
+                        <p>
+                            E-Mail: kontakt@otto-partner.de<br>
+                            (Dies ist eine exemplarische Kontaktangabe für das Design)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-bottom" style="margin: 2rem 0;"></div>
+
+            <!-- Block 2: Haftung & Recht -->
+            <div class="about-grid reveal-text delay-2">
+                <div class="section-label">Haftungsausschluss</div>
+                <div class="editorial-text">
+                    <h3>Haftung für Inhalte</h3>
+                    <p>
+                        Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+                    </p>
+                    <p>
+                        Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+                    </p>
+
+                    <h3>Haftung für Links</h3>
+                    <p>
+                        Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
+                    </p>
+
+                    <h3>Urheberrecht</h3>
+                    <p>
+                        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-bottom" style="margin: 2rem 0;"></div>
+
+            <!-- Block 3: Streitbeilegung -->
+            <div class="about-grid reveal-text delay-3">
+                <div class="section-label">Streitbeilegung</div>
+                <div class="editorial-text">
+                    <p>
+                        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+                        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color: var(--accent-primary); border-bottom: 1px solid var(--accent-highlight);">https://ec.europa.eu/consumers/odr/</a>.
+                    </p>
+                    <p>
+                        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Otto & Partner</h4>
+                    <div class="address-box">
+                        <p>Leopoldstraße 77</p>
+                        <p>80802 München</p>
+                        <p>Deutschland</p>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="leistungen.html">Leistungen</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="impressum.html" style="color: #fff;">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Otto & Partner Strategieberatung. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
